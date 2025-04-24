@@ -1,7 +1,8 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-
+import 'nativewind';
+import './global.css';
 import { View, Text, Button } from 'react-native';
 import Login from './src/Screens/Login/Login.tsx';
 import Register from './src/Screens/Register/Register.tsx';

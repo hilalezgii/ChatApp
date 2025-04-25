@@ -6,12 +6,13 @@ import {useNavigation} from '@react-navigation/native';
 import Octicons from 'react-native-vector-icons/Octicons';
 import Feather from 'react-native-vector-icons/Feather';
 import Loading from '../../Components/Loading.tsx';
+import CustomKeyboard from '../../Components/CustomKeyboard.tsx';
+
 
 const Register: React.FC = () => {
     const navigation = useNavigation();
     const [loading, setLoading] = useState<boolean>(false);
 
-    // useRef ile referansları belirtiyoruz
     const emailRef = useRef<TextInput>(null);
     const passwordRef = useRef<TextInput>(null);
     const usernameRef = useRef<TextInput>(null);
@@ -22,17 +23,17 @@ const Register: React.FC = () => {
             Alert.alert('Sign In', 'Please fill all the fields');
             return;
         }
-
         //register process
     };
 
     return (
-        <View className="flex-1">
+        <CustomKeyboard>
             <StatusBar barStyle="dark-content"/>
-            <View style={{backgroundColor: 'white', paddingTop: hp(8), paddingHorizontal: wp(5)}}
-                  className="flex-1 gap-12">
+            <View style={{backgroundColor: 'white', paddingHorizontal: wp(5)}}
+                  className="flex-1 gap-2">
                 <View className="items-center">
-                    <Image style={{height: hp(20)}} resizeMode="contain" source={require('../../Assets/register.jpg')}/>
+                    <Image style={{height: hp(25)}} resizeMode="contain"
+                           source={require('../../Assets/newRegister.jpg')}/>
                 </View>
                 <View className="gap-10">
                     <Text style={{fontSize: hp(4), textAlign: 'center'}}
@@ -123,7 +124,7 @@ const Register: React.FC = () => {
                     </View>
                 </View>
             </View>
-        </View>
+        </CustomKeyboard>
     );
 };
 

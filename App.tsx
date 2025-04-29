@@ -8,6 +8,7 @@ import Login from './src/Screens/Login/Login.tsx';
 import Register from './src/Screens/Register/Register.tsx';
 import Home from './src/Screens/Home/Home.tsx';
 import {AuthContextProvider, useAuth} from './src/Context/authContext.tsx';
+import HomeHeader from './src/Components/HomeHeader.tsx';
 
 const Stack = createNativeStackNavigator();
 
@@ -15,7 +16,7 @@ const AuthStack = () => (
     <Stack.Navigator>
         <Stack.Screen name="Login" component={Login}/>
         <Stack.Screen name="Register" component={Register}/>
-        <Stack.Screen name="Home" component={Home}/>
+        <Stack.Screen name="Home" options={{header: () => <HomeHeader/>}} component={Home}/>
     </Stack.Navigator>
 );
 

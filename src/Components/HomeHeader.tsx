@@ -12,7 +12,7 @@ const HomeHeader:React.FC = () => {
                 <Text style={{fontSize: hp(3)}} className={'font-medium text-white'}>Chats</Text>
             </View>
             <View>
-                <Image style={{height:hp(4.3),aspectRatio:1, borderRadius:100}} source={require('../../Assets/login.jpg')}/>
+                <Image style={{height:hp(6.0),aspectRatio:1, borderRadius:100}} source={require('../../Assets/login.jpg')}/>
             </View>
         </View>
     );

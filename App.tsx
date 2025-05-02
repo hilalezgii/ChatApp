@@ -8,7 +8,7 @@ import Login from './src/Screens/Login/Login.tsx';
 import Register from './src/Screens/Register/Register.tsx';
 import Home from './src/Screens/Home/Home.tsx';
 import {AuthContextProvider, useAuth} from './src/Context/authContext.tsx';
-import HomeHeader from './src/Components/HomeHeader.tsx';
+import HomeHeader from "./src/Components/HomeHeader.tsx";
 
 const Stack = createNativeStackNavigator();
 

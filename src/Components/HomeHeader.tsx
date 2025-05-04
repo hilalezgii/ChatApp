@@ -79,7 +79,7 @@ const HomeHeader = () => {
 
                                 <TouchableOpacity
                                     className="py-2.5 px-4 rounded-md active:bg-gray-100"
-                                    onPress={handleSignOut}
+                                    onPress={handleSignOut} //firebase auth ile lohout işlemleri bağlanacak
                                 >
                                     <Text className="text-base font-normal">Sign Out</Text>
                                 </TouchableOpacity>

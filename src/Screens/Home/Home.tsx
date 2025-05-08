@@ -1,14 +1,12 @@
 import {Text, TouchableOpacity, View} from 'react-native';
+import {heightPercentageToDP as hp} from "react-native-responsive-screen";
 
 const Home:React.FC = () => {
     return (
         <View className={"flex-1 bg-white"}>
-            <Text>Home</Text>
-            <TouchableOpacity>
-                //daha sonra firebase ile authentication işlemleri için bağlanacak
-                <Text>Log Out</Text>
-
-            </TouchableOpacity>
+            <Text style={{ fontSize: hp(3), textAlign: 'center' }} className="mt-8 font-bold tracking-wider text-neutral-800">
+                Welcome Home Page
+            </Text>
         </View>
     );
 };

@@ -1,4 +1,7 @@
 import React, {createContext, useEffect, useState, ReactNode, useContext} from 'react';
+import {onAuthStateChanged} from '@react-native-firebase/auth';
+import {auth} from '../../firebaseConfig.ts';
+
 
 type AuthContextType = {
     user: null;
@@ -19,13 +22,16 @@ export const AuthContextProvider: React.FC<AuthProviderProps> = ({ children }) =
     const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
 
     useEffect(() => {
-        const unsubscribe = () => {
-            setUser(user);
-            setIsAuthenticated(!!user);
-        };
-
-        return unsubscribe;
+        const unsub = onAuthStateChanged(auth,(user)=>{
+            if (user) {
+                setIsAuthenticated(true);
+            }
+            else {
+                setIsAuthenticated(false);
+            }
+        });
     }, []);
+
 
     const login = async (email: string, password: string) => {
         try {

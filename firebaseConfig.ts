@@ -1,23 +1,22 @@
+// Import the functions you need from the SDKs you need
 import { initializeApp } from 'firebase/app';
-import { initializeAuth, getReactNativePersistence } from 'firebase/auth';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import {initializeAuth,getReact} from 'firebase/auth';
+import AsyncStorage from "@react-native-async-storage/async-storage";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
 
-// Firebase config – plist dosyasındaki bilgilerin aynısı
+// Your web app's Firebase configuration
 const firebaseConfig = {
-    apiKey: 'AlzaSyA2rE0hyWPP2IRgNcXy7C_cFjUQonnC-gc',
-    authDomain: 'chat-160d5.firebaseapp.com',
-    projectId: 'chat-160d5',
-    storageBucket: 'chat-160d5.appspot.com',
-    messagingSenderId: '718498410828',
-    appId: '1:718498410828:ios:d403fa332ddff815db9fe9',
+    apiKey: 'AIzaSyDFYu4QPBe09dkCIJxqqh2kcHOK-oqbUy8',
+    authDomain: 'newchatapp-8a6ea.firebaseapp.com',
+    projectId: 'newchatapp-8a6ea',
+    storageBucket: 'newchatapp-8a6ea.firebasestorage.app',
+    messagingSenderId: '967562712758',
+    appId: '1:967562712758:web:f0ef3378d5e8db65de3817',
 };
 
-// Uygulamayı başlat
+// Initialize Firebase
 const app = initializeApp(firebaseConfig);
-
-// Kalıcı oturum (persistence) ile auth başlat
-const auth = initializeAuth(app, {
-    persistence: getReactNativePersistence(AsyncStorage),
+export const auth = initializeAuth(app,{
+    persistence:getReactNativePersistence(AsyncStorage)
 });
-
-export { auth };

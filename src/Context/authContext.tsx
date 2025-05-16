@@ -1,10 +1,8 @@
-import React, {createContext, useEffect, useState, ReactNode, useContext} from 'react';
-import {onAuthStateChanged} from '@react-native-firebase/auth';
-import {auth} from '../../firebaseConfig.ts';
-
+import React, { createContext, useEffect, useState, ReactNode, useContext } from 'react';
+import auth, { FirebaseAuthTypes } from '@react-native-firebase/auth';
 
 type AuthContextType = {
-    user: null;
+    user: FirebaseAuthTypes.User | null;
     isAuthenticated: boolean;
     login: (email: string, password: string) => Promise<void>;
     logout: () => Promise<void>;
@@ -18,42 +16,52 @@ type AuthProviderProps = {
 };
 
 export const AuthContextProvider: React.FC<AuthProviderProps> = ({ children }) => {
-    const [user, setUser] = useState<null>(null);
+    const [user, setUser] = useState<FirebaseAuthTypes.User | null>(null);
     const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
 
     useEffect(() => {
-        const unsub = onAuthStateChanged(auth,(user)=>{
-            if (user) {
+        const unsubscribe = auth().onAuthStateChanged((currentUser) => {
+            if (currentUser) {
+                setUser(currentUser);
                 setIsAuthenticated(true);
-            }
-            else {
+            } else {
+                setUser(null);
                 setIsAuthenticated(false);
             }
         });
-    }, []);
 
+        return unsubscribe;
+    }, []);
 
     const login = async (email: string, password: string) => {
         try {
-            console.log('email', email, password);
+            await auth().signInWithEmailAndPassword(email, password);
         } catch (e) {
             console.error('Login Error:', e);
+            throw e;
         }
     };
 
     const logout = async () => {
         try {
-            console.log('logout');
+            await auth().signOut();
         } catch (e) {
             console.error('Logout Error:', e);
+            throw e;
         }
     };
 
     const register = async (email: string, password: string, userName: string, profileUrl: string) => {
         try {
-            console.log('register', email, password);
+            const userCredential = await auth().createUserWithEmailAndPassword(email, password);
+            await userCredential.user.updateProfile({
+                displayName: userName,
+                photoURL: profileUrl,
+            });
+            setUser(userCredential.user);
         } catch (e) {
             console.error('Register Error:', e);
+            throw e;
         }
     };
 
@@ -66,12 +74,8 @@ export const AuthContextProvider: React.FC<AuthProviderProps> = ({ children }) =
 
 export const useAuth = (): AuthContextType => {
     const value = useContext(AuthContext);
-
     if (!value) {
         throw new Error('useAuth must be used within an AuthContextProvider');
     }
-
     return value;
 };
-
-
